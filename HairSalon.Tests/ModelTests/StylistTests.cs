@@ -105,7 +105,7 @@ namespace HairSalon.Tests
         [TestMethod]
         public void Save_DatabaseAssignsIdToStylist_Id()
         {
-            Stylist testStylist = new Stylist("Household chores");
+            Stylist testStylist = new Stylist("Jane");
             testStylist.Save();
             Stylist savedStylist = Stylist.GetAll()[0];
             int result = savedStylist.GetId();
@@ -126,5 +126,16 @@ namespace HairSalon.Tests
             List<Client> resultClientList = testStylist.GetClients();
             CollectionAssert.AreEqual(testClientList, resultClientList);
         }
+
+        // [TestMethod]
+        // public void Delete_DeletesStylistFromDatabase_NoStylist()
+        // {
+        //     Stylist testStylist = new Stylist("Jane");
+        //     testStylist.Save();
+        //     Stylist emptyList = new Stylist("");
+        //     Stylist foundStylist = Stylist.Find(testStylist.GetId());
+        //     foundStylist.Delete();
+        //     Assert.AreEqual(foundStylist, emptyList);
+        // }
     }
 }

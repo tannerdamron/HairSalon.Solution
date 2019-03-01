@@ -59,6 +59,7 @@ namespace HairSalon.Controllers
             client.Delete();
             return RedirectToAction("DeletedClient");
         }
+        
         [HttpGet("/stylists/{stylsitId}/deletedclient")]
         public ActionResult DeletedClient()
         {
