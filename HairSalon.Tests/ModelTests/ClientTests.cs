@@ -123,5 +123,15 @@ namespace HairSalon.Tests
             int result = newClient.GetStylistId();
             Assert.AreEqual(newStylist.GetId(), result);
         }
+
+        [TestMethod]
+        public void Delete_DeletesClientFromDatabase_NoClient()
+        {
+            Client testClient = new Client("Walk the Dog", 1);
+            Client emptyList = new Client("", 0);
+            Client foundClient = Client.Find(testClient.GetId());
+            foundClient.Delete();
+            Assert.AreEqual(foundClient, emptyList);
+        }
     }
 }
