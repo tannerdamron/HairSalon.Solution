@@ -120,9 +120,7 @@ namespace HairSalon.Tests
         {
             Stylist newStylist = new Stylist("Jane");
             Client newClient = new Client("Jimbo", 0, newStylist.GetId());
-        
             int result = newClient.GetStylistId();
-        
             Assert.AreEqual(newStylist.GetId(), result);
         }
     }
