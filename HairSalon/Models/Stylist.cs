@@ -80,6 +80,61 @@ namespace HairSalon.Models
             }
         }
 
+        public static Stylist Find(int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM stylists WHERE id = (@searchId);";
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = id;
+            cmd.Parameters.Add(searchId);
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            int StylistId = 0;
+            string StylistName = "";
+            while (rdr.Read())
+            {
+                StylistId = rdr.GetInt32(0);
+                StylistName = rdr.GetString(1);
+            }
+            Stylist newStylist = new Stylist(StylistName, StylistId);
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return newStylist;
+        }
+
+        public List<Client> GetClients()
+        {
+            List<Client> allStylistClients = new List<Client> { };
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylist_id;";
+            MySqlParameter StylistId = new MySqlParameter();
+            StylistId.ParameterName = "@stylist_id";
+            StylistId.Value = this._id;
+            cmd.Parameters.Add(StylistId);
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while (rdr.Read())
+            {
+                int ClientId = rdr.GetInt32(0);
+                string ClientDescription = rdr.GetString(1);
+                int ClientStylistId = rdr.GetInt32(2);
+                Client newClient = new Client(ClientDescription, ClientStylistId, ClientId);
+                allStylistClients.Add(newClient);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return allStylistClients;
+        }
+
         public override bool Equals(System.Object otherStylist)
         {
             if (!(otherStylist is Stylist))

@@ -56,7 +56,6 @@ namespace HairSalon.Tests
         [TestMethod]
         public void GetAll_ReturnsAllStylistObjects_StylistList()
         {
-            //Arrange
             string name01 = "Jane";
             string name02 = "John";
             Stylist newStylist1 = new Stylist(name01);
@@ -66,6 +65,65 @@ namespace HairSalon.Tests
             List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
             List<Stylist> result = Stylist.GetAll();
             CollectionAssert.AreEqual(newList, result);
+        }
+
+        [TestMethod]
+        public void Find_ReturnsStylistInDatabase_Stylist()
+        {
+            Stylist testStylist = new Stylist("Jane");
+            testStylist.Save();
+            Stylist foundStylist = Stylist.Find(testStylist.GetId());
+            Assert.AreEqual(testStylist, foundStylist);
+        }
+
+        [TestMethod]
+        public void GetClients_ReturnsEmptyClientList_ClientList()
+        {
+            string name = "Jane";
+            Stylist newStylist = new Stylist(name);
+            List<Client> newList = new List<Client> { };
+            List<Client> result = newStylist.GetClients();
+            CollectionAssert.AreEqual(newList, result);
+        }
+
+        [TestMethod]
+        public void GetAll_StylistsEmptyAtFirst_List()
+        {
+            int result = Stylist.GetAll().Count;
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void Equals_ReturnsTrueIfNamesAreTheSame_Stylist()
+        {
+            Stylist firstStylist = new Stylist("Jane");
+            Stylist secondStylist = new Stylist("Jane");
+            Assert.AreEqual(firstStylist, secondStylist);
+        }
+
+        [TestMethod]
+        public void Save_DatabaseAssignsIdToStylist_Id()
+        {
+            Stylist testStylist = new Stylist("Household chores");
+            testStylist.Save();
+            Stylist savedStylist = Stylist.GetAll()[0];
+            int result = savedStylist.GetId();
+            int testId = testStylist.GetId();
+            Assert.AreEqual(testId, result);
+        }
+
+        [TestMethod]
+        public void GetClients_RetrievesAllClientsWithStylist_ClientList()
+        {
+            Stylist testStylist = new Stylist("Jane");
+            testStylist.Save();
+            Client firstClient = new Client("Jimbob", testStylist.GetId());
+            firstClient.Save();
+            Client secondClient = new Client("Barry", testStylist.GetId());
+            secondClient.Save();
+            List<Client> testClientList = new List<Client> { firstClient, secondClient };
+            List<Client> resultClientList = testStylist.GetClients();
+            CollectionAssert.AreEqual(testClientList, resultClientList);
         }
     }
 }
