@@ -149,6 +149,23 @@ namespace HairSalon.Models
             }
         }
 
+        public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM clients WHERE id = (@searchId);";
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = this.GetId();
+            cmd.Parameters.Add(searchId);
+            cmd.ExecuteNonQuery();
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
         public override bool Equals(System.Object otherClient)
         {
             if (!(otherClient is Client))

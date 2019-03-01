@@ -1,5 +1,9 @@
 <h1>Stylist details:</h1>
 <h1>Stylist Name: @Model["stylist"].GetName()</h1>
+@if (client.Count == 0)
+{
+  <h3>This stylist has no clients added</h3>
+}
 
 <h2>Clients:</h2>
 

@@ -46,5 +46,16 @@ namespace HairSalon.Controllers
             model.Add("client", client);
             return View("Show", model);
         }
+
+        [HttpGet("/stylists/{stylistId}/clients/{clientId}/delete")]
+        public ActionResult Delete(int stylistId, int clientId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Stylist stylist = Stylist.Find(stylistId);
+            Client client = Client.Find(clientId);
+            model.Add("stylist", stylist);
+            model.Add("client", client);
+            return View(model);
+        }
     }
 }

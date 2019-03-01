@@ -31,11 +31,14 @@ Download .NET Core 1.1.4 SDK and .NET Core Runtime 1.1.2 and MAMP and install th
 * > "CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));"
 * > "CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255)), stylist_id INT;"
 * To use the webpage, first navigate to the directory "HairSalon"
-* Run the "dotnet restore" command
-* Then use "dotnet build" command
-* Then use "dotnet run" command
+* Use the following commands:
+* > "dotnet restore"
+* > "dotnet build"
+* > "dotnet run"
 * Then go to "http://localhost:5000" to see webpage
-* To run the tests, use these commands from the directory "HairSalon.Solution": "$ cd HairSalon.Tests", "$ dotnet test"
+* To run the tests, use these commands from the directory "HairSalon.Solution": 
+* > "cd HairSalon.Tests"
+* > "dotnet test"
 
 ### Known Bugs
 * No Known Bugs
