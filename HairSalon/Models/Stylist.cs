@@ -146,6 +146,7 @@ namespace HairSalon.Models
             stylistId.Value = this.GetId();
             cmd.Parameters.Add(stylistId);
             cmd.ExecuteNonQuery();
+            conn.Close();
             if (conn != null)
             {
                 conn.Close();
