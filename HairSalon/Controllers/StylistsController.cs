@@ -65,18 +65,18 @@ namespace HairSalon.Controllers
             return View(model);
         }
 
-        [HttpPost("/stylists")]
-        public ActionResult DeleteStylist(int stylistId)
-        {
-            Stylist stylist = Stylist.Find(stylistId);
-            stylist.Delete();
-            return RedirectToAction("DeletedStylist");
-        }
+        // [HttpPost("/stylists")]
+        // public ActionResult DeleteStylist(int stylistId)
+        // {
+        //     Stylist stylist = Stylist.Find(stylistId);
+        //     stylist.Delete();
+        //     return RedirectToAction("DeletedStylist");
+        // }
 
-        [HttpGet("/stylists/deletedstylist")]
-        public ActionResult DeletedStylist()
-        {
-            return View();
-        }
+        // [HttpGet("/stylists/deletedstylist")]
+        // public ActionResult DeletedStylist()
+        // {
+        //     return View();
+        // }
     }
 }
