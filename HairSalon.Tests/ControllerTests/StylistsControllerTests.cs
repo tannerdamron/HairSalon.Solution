@@ -42,12 +42,11 @@ namespace HairSalon.Tests
         }
 
         [TestMethod]
-        public void DeleteClient_RedirectToCorrectAction_DeleteClient()
+        public void Delete_ReturnsCorrectView_True()
         {
             StylistsController controller = new StylistsController();
-            RedirectToActionResult newView = controller.DeleteClient(1, 1) as RedirectToActionResult;
-            string result = newView.ActionName;
-            Assert.AreEqual(result, "DeletedClient");
+            ActionResult newView = controller.Delete(1, 1);
+            Assert.IsInstanceOfType(newView, typeof(ViewResult));
         }
     }
 }
