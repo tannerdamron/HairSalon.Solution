@@ -127,19 +127,6 @@ namespace HairSalon.Tests
             CollectionAssert.AreEqual(testClientList, resultClientList);
         }
 
-        // [TestMethod]
-        // public void Delete_DeletesStylistFromDatabase_StylistList()
-        // {
-        //     Stylist testStylist = new Stylist("Jane");
-        //     testStylist.Save();
-        //     List<Stylist> emptyList = new List<StylistTest> {};
-        //     List<Stylist> testList = testStylist.GetAll();
-
-        //     testStylist.Delete();
-
-        //     CollectionAssert.AreEqual(testStylist, emptyList);
-        // }
-
         [TestMethod]
         public void Delete_DeletesStylistFromDatabase_StylistList()
         {
