@@ -52,15 +52,21 @@ namespace HairSalon.Controllers
             return View("Show", model);
         }
 
-        
-
         [HttpGet("/stylists/{stylistId}/delete")]
-        public ActionResult Delete(int stylistId, int clientId)
+        public ActionResult Delete(int stylistId)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Stylist stylist = Stylist.Find(stylistId);
+            model.Add("stylist", stylist);
+            return View(model);
+        }
+
+        [HttpPost("/stylists/{stylistId}/deleted")]
+        public ActionResult DeleteStylist(int stylistId)
         {
             Stylist stylist = Stylist.Find(stylistId);
             stylist.Delete();
-            return View();
+            return View("DeletedStylist");
         }
-
     }
 }

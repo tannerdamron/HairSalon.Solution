@@ -45,7 +45,7 @@ namespace HairSalon.Tests
         public void Delete_ReturnsCorrectView_True()
         {
             StylistsController controller = new StylistsController();
-            ActionResult newView = controller.Delete(1, 1);
+            ActionResult newView = controller.Delete(0);
             Assert.IsInstanceOfType(newView, typeof(ViewResult));
         }
     }

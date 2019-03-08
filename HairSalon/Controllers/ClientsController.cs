@@ -58,18 +58,13 @@ namespace HairSalon.Controllers
             return View(model);
         }
 
-        [HttpPost("/stylists/{stylsitId}")]
+        [HttpPost("/stylists/{stylsitId}/clients/{clientId}/deleted")]
         public ActionResult DeleteClient(int stylistId, int clientId)
         {
+            Stylist stylist = Stylist.Find(stylistId);
             Client client = Client.Find(clientId);
             client.Delete();
-            return RedirectToAction("DeletedClient");
-        }
-
-        [HttpGet("/stylists/{stylsitId}/deletedclient")]
-        public ActionResult DeletedClient()
-        {
-            return View();
+            return View("DeletedClient");
         }
     }
 }
