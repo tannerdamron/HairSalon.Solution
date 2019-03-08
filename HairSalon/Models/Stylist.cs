@@ -182,9 +182,9 @@ namespace HairSalon.Models
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"SELECT specialties.* FROM stylists 
-                    JOIN specialties_stylists ON (stylist_id = specialties_stylists.stylist_id) 
-                    JOIN specialties ON (specialties_stylists.specialty_id = specialties.id)
-                    WHERE stylists.id = @StylistId;";
+                JOIN specialties_stylists ON (stylist_id = specialties_stylists.stylist_id) 
+                JOIN specialties ON (specialties_stylists.specialty_id = specialties.id)
+                WHERE stylists.id = @StylistId;";
             MySqlParameter stylistId = new MySqlParameter();
             stylistId.ParameterName = "@StylistId";
             stylistId.Value = _id;
@@ -204,6 +204,28 @@ namespace HairSalon.Models
                 conn.Dispose();
             }
             return specialties;
+        }
+
+        public void AddSpecialty(Specialty newSpecialty)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO specialties_stylists (stylist_id, specialty_id) VALUES (@StylistId, @SpecialtyId);";
+            MySqlParameter stylist_id = new MySqlParameter();
+            stylist_id.ParameterName = "@StylistId";
+            stylist_id.Value = _id;
+            cmd.Parameters.Add(stylist_id);
+            MySqlParameter specialty_id = new MySqlParameter();
+            specialty_id.ParameterName = "@SpecialtyId";
+            specialty_id.Value = newSpecialty.GetId();
+            cmd.Parameters.Add(specialty_id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
         }
 
         public override bool Equals(System.Object otherStylist)
